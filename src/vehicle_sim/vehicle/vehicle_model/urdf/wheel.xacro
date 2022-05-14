@@ -20,7 +20,7 @@
         </geometry>
         <origin xyz="0 0 0" rpy="0 0 ${yaw}"/>
         <material name="gray">
-          <color rgba="0.1 0.1 0.1 2.0"/>
+          <color rgba="0.1 0.1 0.1 1.0"/>
         </material>
       </visual>
 
