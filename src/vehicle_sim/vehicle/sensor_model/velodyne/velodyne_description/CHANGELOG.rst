@@ -2,6 +2,24 @@
 Changelog for package velodyne_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.12 (2021-03-30)
+-------------------
+
+1.0.11 (2021-02-23)
+-------------------
+* Add organize_cloud parameter to match velodyne_pointcloud
+* Contributors: Kevin Hallenbeck
+
+1.0.10 (2020-08-03)
+-------------------
+* Change PointCloud visualization type from flat squares to points in example rviz config
+* Bump minimum CMake version to 3.0.2 in all CMakeLists.txt
+* Fix xacro macro instantiation
+* Contributors: Kevin Hallenbeck, Micho Radovnikovich
+
+1.0.9 (2019-03-08)
+------------------
+
 1.0.8 (2018-09-08)
 ------------------
 

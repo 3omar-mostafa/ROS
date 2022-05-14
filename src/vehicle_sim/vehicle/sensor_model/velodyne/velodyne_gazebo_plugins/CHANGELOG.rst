@@ -2,6 +2,29 @@
 Changelog for package velodyne_gazebo_plugins
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.12 (2021-03-30)
+-------------------
+* Fix swapped PointCloud2 width/height
+  Bug introduced in recent commit adding organize_cloud option
+* Contributors: Kevin Hallenbeck
+
+1.0.11 (2021-02-23)
+-------------------
+* Remove support for end-of-life ROS distributions
+* Add organize_cloud parameter to match velodyne_pointcloud
+* Contributors: Kevin Hallenbeck
+
+1.0.10 (2020-08-03)
+-------------------
+* Change PointCloud2 structure to match updated velodyne_pointcloud package
+* Bump minimum CMake version to 3.0.2 in all CMakeLists.txt
+* Contributors: Kevin Hallenbeck, Micho Radovnikovich
+
+1.0.9 (2019-03-08)
+------------------
+* Added min_intensity parameter to support cliping of low intensity returns
+* Contributors: Jonathan Wheare, Kevin Hallenbeck
+
 1.0.8 (2018-09-08)
 ------------------
 * Changed iteration order to more closely represent the live velodyne driver
