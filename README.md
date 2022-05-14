@@ -1,70 +1,76 @@
-# SLAMEnvironment
+# ROS/Gazebo SLAM Environment
 
 Vehicle model with (3D lidar, IMU and Camera sensors) can be simulated in 2 different maps.
-![ Vehicle ](https://github.com/BelalElhossany/SLAMEnvironment/blob/main/images/vehicle.PNG)
+![ Vehicle ](images/vehicle.PNG)
 
-# How to run
+-------------------------------------------------------------------------------------------
+
+# How to Build
+
+We have tested this code on Ubuntu 20.04 with `ROS noetic`
 
 1- Install ROS
-  - melodic for UBUNTU 18
-  - noetic for UBUNTU 20
- ```
- http://wiki.ros.org/ROS/Installation
- ```
- NOTE: Choose Desktop-Full Install in section 1.4 to install gazebo with ROS
+ ```bash
+ # https://wiki.ros.org/noetic/Installation/Ubuntu
  
- 2- Create catkin workspace
- NOTE: don't follow install catkin link, you don't have to explicitly install it.
- ```
- http://wiki.ros.org/catkin/Tutorials/create_a_workspace
+ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+ sudo apt install curl gnupg apt-transport-https
+ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+ 
+ sudo apt install ros-noetic-desktop-full
+ sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential python-is-python3
+ 
+ sudo rosdep init
+ rosdep update
  ```
  
- 3- Clone the repo
+  NOTE: We install `python-is-python3` wchich makes `/usr/bin/python` points to `/usr/bin/python3`
+ 
+ 
+ 2- Source your ROS installation
+ NOTE: If you use are in a conda environment, deactivate it before using any ros commands `conda deactivate`
+ ```bash
+ source /opt/ros/noetic/setup.bash
  ```
- cd ~/catkin_ws/src
- git clone https://github.com/BelalElhossany/SLAMEnvironment.git
+ 
+ 3- Clone the repo and enter it
+ ```bash
+ git clone https://github.com/3omar-mostafa/ROS.git
+ cd ROS
  ```
  
  4- Install dependencies
- ```
- cd ~/catkin_ws/src/SLAMEnvironment/vehicle_sim
- rosdep install --from-paths . -y
+ ```bash
+ rosdep install --from-paths ./src/vehicle_sim -y
  ```
  
  5- Build
- ```
+ ```bash
  catkin_make
- source ~/catkin_ws/devel/setup.bash
+ source ./devel/setup.bash
  ```
+ 
  6- upgrade gazebo version and download gazebo models
- ```
-sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-stable.list'
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
-sudo apt update
-sudo apt upgrade
- ```
- ```
+ ```bash
  rosrun vehicle_sim_launcher setup.sh
  ```
+ # How to Run
  
- 7- Make python code executable
- ```
- cd ~/catkin_ws/src/SLAMEnvironment/slam_code/scripts
- chmod 777 slamcode.py
- ```
- 8- Run Simple walls environment
- ```
+ 1- Run Simple walls environment
+ ```bash
  roslaunch vehicle_sim_launcher walls.launch
  ```
- ![ Walls ](https://github.com/BelalElhossany/SLAMEnvironment/blob/main/images/walls.PNG)
+ ![ Walls ](images/walls.PNG)
  
- 9- Run complex city environment
- ```
+ -------------------------------------------------------------------------------------------
+ 
+ 2- Run complex city environment
+ ```bash
  roslaunch vehicle_sim_launcher city.launch
  ```
- ![ City ](https://github.com/BelalElhossany/SLAMEnvironment/blob/main/images/city.PNG)
+ ![ City ](images/city.PNG)
  
- NOTE: add ```gpu:=true ``` to roslaunch command to use gpu.
+ NOTE: add `gpu:=true` to roslaunch command to use gpu.
 
 -------------------------------------------------------------------------------------------
 Once you launch it, 3 windows will pop up:
@@ -76,20 +82,21 @@ Once you launch it, 3 windows will pop up:
     4- Image to show camera output.
     Your map needs to be added to the list :)
     
-    ![ Rviz ](https://github.com/BelalElhossany/SLAMEnvironment/blob/main/images/rviz.PNG)
+    ![ Rviz ](images/rviz.PNG)
   - Window to control vehicle velocity and steering.
   - 
-    ![ Vehicle ](https://github.com/BelalElhossany/SLAMEnvironment/blob/main/images/control.PNG)
+    ![ Vehicle ](images/control.PNG)
 
 -------------------------------------------------------------------------------------------
 # Sample code
-sample code exists in: ```~/catkin_ws/src/SLAMEnvironment/slam_code/scripts```
-  - It subscribes to ```/points_raw``` topic which lidar publishes on.
+sample code exists in: `ROS/src/slam_code/scripts`
+  - It subscribes to `/points_raw` topic which lidar publishes on.
   - Creates dumy PointCloud2 message to simulate the map which will be the output of the SLAM algorithm, then publishes it on ```/map``` topic.
   - Your SLAM code needs to be added to a script like this.
 
-NOTE: This code is included in launch files, so runs once you do step 7 or 8.
 -------------------------------------------------------------------------------------------
 # Citation
 
-this is a modified version of this repo ```https://github.com/yukkysaito/vehicle_sim```.
+This is a based on work done by:
+* [Yukihiro Saito](https://github.com/yukkysaito/vehicle_sim)
+* [Belal Elhossany](https://github.com/BelalElhossany/SLAMEnvironment)
