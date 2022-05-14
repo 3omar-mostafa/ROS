@@ -4,7 +4,7 @@
   <arg name="model" default="$(find vehicle_model)/urdf/vehicle.xacro"/>
   <arg name="ns" default="/autoware_gazebo"/>
   <arg name="gpu" default="false"/>
-  <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg model) gpu:=$(arg gpu)" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model) gpu:=$(arg gpu)" />
   <arg name="rvizconfig" default="$(find gazebo_world_description)/worlds/myrviz.rviz" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
