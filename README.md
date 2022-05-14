@@ -24,11 +24,12 @@ We have tested this code on Ubuntu 20.04 with `ROS noetic`
  rosdep update
  ```
  
-  NOTE: We install `python-is-python3` wchich makes `/usr/bin/python` points to `/usr/bin/python3`
+  **NOTE**: We install `python-is-python3` wchich makes `/usr/bin/python` points to `/usr/bin/python3`
  
  
  2- Source your ROS installation
- NOTE: If you use are in a conda environment, deactivate it before using any ros commands `conda deactivate`
+ 
+ **NOTE**: If you use are in a conda environment, deactivate it before using any ros commands `conda deactivate`
  ```bash
  source /opt/ros/noetic/setup.bash
  ```
@@ -50,7 +51,7 @@ We have tested this code on Ubuntu 20.04 with `ROS noetic`
  source ./devel/setup.bash
  ```
  
- 6- upgrade gazebo version and download gazebo models
+ 6- Upgrade gazebo and download gazebo models
  ```bash
  rosrun vehicle_sim_launcher setup.sh
  ```
@@ -70,7 +71,7 @@ We have tested this code on Ubuntu 20.04 with `ROS noetic`
  ```
  ![ City ](images/city.PNG)
  
- NOTE: add `gpu:=true` to roslaunch command to use gpu.
+ **NOTE**: add `gpu:=true` to roslaunch command to use gpu.
 
 -------------------------------------------------------------------------------------------
 Once you launch it, 3 windows will pop up:
