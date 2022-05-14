@@ -2,24 +2,16 @@
 
 mkdir -p ~/.gazebo
 echo "Download generic gazebo models"
-if [ -e /tmp/gazebo_models ]; then
-  echo "Already exist /tmp/gazebo_models"
-  echo "removing /tmp/gazebo_models"
-  rm -r /tmp/gazebo_models
-fi
-hg clone https://bitbucket.org/osrf/gazebo_models /tmp/gazebo_models
 
-if [ -e /tmp/gazebo_models ]; then
-  echo "Install generic gazebo models"
-  mv -n /tmp/gazebo_models/* ~/.gazebo/models/
-  echo "Completed"
-else
-  echo "Error"
-fi
+MODELS_PATH="$HOME/.gazebo/models"
+MODELS_REPO="https://github.com/osrf/gazebo_models"
+
+# Clone Repo if it does not exist, else pull latest changes
+git clone "$MODELS_REPO" "$MODELS_PATH" 2> /dev/null || git -C "$MODELS_PATH" pull
 
 echo "Install osrf_citysim models"
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-cp -rn $SCRIPT_DIR/../../../worlds/external/osrf_citysim/models/* ~/.gazebo/models/
+cp -rn $SCRIPT_DIR/../../../worlds/external/osrf_citysim/models/* "$MODELS_PATH"
 
 echo "Install card_demo models"
-cp -rn $SCRIPT_DIR/../../../worlds/external/car_demo/car_demo/models/* ~/.gazebo/models/
+cp -rn $SCRIPT_DIR/../../../worlds/external/car_demo/car_demo/models/* "$MODELS_PATH"
