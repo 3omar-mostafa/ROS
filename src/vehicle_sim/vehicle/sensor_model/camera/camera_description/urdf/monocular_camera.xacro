@@ -3,8 +3,8 @@
   <xacro:property name="pi" value="3.1415926835897931" />
 
 
-  <xacro:macro name="monocular_camera_macro" params="suffix parent namespace x y z roll pitch yaw fps width height fov">
-    <xacro:property name="sensor_box" value="0.05" />
+  <xacro:macro name="monocular_camera_macro" params="suffix parent namespace x y z roll pitch yaw fps width height fov scale:=1">
+    <xacro:property name="sensor_box" value="${scale * 0.05}" />
     <xacro:property name="mass" value="0.1" />
 
     <joint name="${suffix}_joint" type="fixed">
