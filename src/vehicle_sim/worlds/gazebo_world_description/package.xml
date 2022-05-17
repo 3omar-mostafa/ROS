@@ -8,8 +8,17 @@
 
   <license>Apache2.0</license>
 
+  <exec_depend>gazebo_ros</exec_depend>
   <buildtool_depend>catkin</buildtool_depend>
 
   <export>
+    <!-- Note: XML comments do not allow two consecutive dashes -->
+    <!-- Therefore replace underscore (_) in __attrib with dash (-) -->
+
+    <!-- Use the follwing command to check the path that gazebo_ros sees: -->
+    <!-- rospack plugins __attrib="gazebo_model_path" gazebo_ros -->
+    <!-- rospack plugins __attrib="gazebo_media_path" gazebo_ros -->
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+    <gazebo_ros gazebo_media_path="${prefix}/models"/>
   </export>
 </package>
