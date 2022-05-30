@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>config</name>
+  <version>0.0.0</version>
+  <description>The launcher package</description>
+  <maintainer email="hafez@cmp22.com">hafez</maintainer>
+
+  <license>Apache2.0</license>
+
+  <exec_depend>gazebo_ros</exec_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>
