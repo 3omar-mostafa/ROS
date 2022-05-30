@@ -11,7 +11,7 @@
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
-    <arg name="headless" value="false"/>
+    <arg name="headless" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="verbose" value="true"/>
   </include>
@@ -23,19 +23,7 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
-  <!-- <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering" /> -->
-  
-  <node pkg="joy" type="joy_node" name="joy_node">
-    <param name="dev" value="/dev/input/js0" />
-    <param name="deadzone" value="0.3" />
-    <param name="autorepeat_rate" value="40" />
-  </node>
-  
- 
-  <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node">
-    <rosparam command="load" file="$(find config)/xbox.config.yaml" />
-  </node>
-  
+
   <node pkg="gmapping" type="slam_gmapping" name='gmapping_node' output='screen'>
     <param name="base_frame" value="base_link"/>
     <param name="odom_frame" value="odom"/>
