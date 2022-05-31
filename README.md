@@ -1,9 +1,10 @@
-# ROS/Gazebo SLAM Environment
+# ROS/Gazebo SLAM Demo
 
-Vehicle model with (3D lidar, IMU and Camera sensors) can be simulated in 2 different maps.
-![ Vehicle ](images/vehicle.PNG)
+Our used vehicle is [Rosbot](https://husarion.com/manuals/rosbot/) with LIDAR, RGB-D camera, IMU sensors.
 
--------------------------------------------------------------------------------------------
+
+
+![Rosbot1](images/rosbot_1.png)
 
 # How to Build
 
@@ -48,7 +49,7 @@ We have tested this code on Ubuntu 20.04 with `ROS noetic`
  
  4- Install dependencies
  ```bash
- rosdep install --from-paths ./src/vehicle_sim -y
+ rosdep install --from-paths ./src -y
  ```
  
  5- Build
@@ -57,53 +58,54 @@ We have tested this code on Ubuntu 20.04 with `ROS noetic`
  source ./devel/setup.bash
  ```
  
- 6- Download gazebo models
- ```bash
- rosrun vehicle_sim_launcher setup.sh
- ```
  # How to Run
  
- 1- Run Simple walls environment
+ 1- Run Using Mouse Controls
  ```bash
- roslaunch vehicle_sim_launcher walls.launch
+ roslaunch launcher bookstore_mouse.launch
  ```
- ![ Walls ](images/walls.PNG)
- 
- -------------------------------------------------------------------------------------------
- 
- 2- Run complex city environment
- ```bash
- roslaunch vehicle_sim_launcher city.launch
- ```
- ![ City ](images/city.PNG)
- 
  **NOTE**: add `gpu:=true` to roslaunch command to use gpu.
 
--------------------------------------------------------------------------------------------
-Once you launch it, 3 windows will pop up:
-  - Gazebo Simulation.
-  - RVIZ : For visualization, you will find:
-    1- Car model.
-    2- Colored points representing lidar readings.
-    3- Funny arrow representing IMU readings.
-    4- Image to show camera output.
-    Your map needs to be added to the list :)
-    
-    ![ Rviz ](images/rviz.PNG)
-  - Window to control vehicle velocity and steering.
-  - 
-    ![ Vehicle ](images/control.PNG)
 
--------------------------------------------------------------------------------------------
-# Sample code
-sample code exists in: `ROS/src/slam_code/scripts`
-  - It subscribes to `/points_raw` topic which lidar publishes on.
-  - Creates dumy PointCloud2 message to simulate the map which will be the output of the SLAM algorithm, then publishes it on ```/map``` topic.
-  - Your SLAM code needs to be added to a script like this.
+ ![ mouse controls ](images/control.png)
+ 
+ ------------------------------------------------------
+ 
+ 2- Run Using Joystick Controller
+ ```bash
+ roslaunch launcher bookstore_joystick.launch
+ ```
+ **NOTE**: add `gpu:=true` to roslaunch command to use gpu.
 
--------------------------------------------------------------------------------------------
-# Citation
+ **How to Configure Joystick**: 
+  * You can customize the controller input to fit your needs by following [this tutorial](https://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick)
+  * Once you knew all the buttons you need, put these data in `src/config/xbox.config.yaml`
 
-This is a based on work done by:
-* [Yukihiro Saito](https://github.com/yukkysaito/vehicle_sim)
-* [Belal Elhossany](https://github.com/BelalElhossany/SLAMEnvironment)
+-------------------------------------------------------
+
+# Robot
+* We used [Rosbot](https://husarion.com/manuals/rosbot/) with LIDAR, RGB-D camera, IMU sensors.
+
+* The robot description can be found on [github](https://github.com/husarion/ROSbot_description)
+
+* A few modifications were made on the robot as changing its mass to be more stable in motion
+
+![Rosbot2](images/rosbot_2.png)
+
+-------------------------------------------------------
+
+# Map
+* Our map is a bookstore world, taken from [AWS RoboMaker](https://github.com/aws-robotics/aws-robomaker-bookstore-world)
+* We have simplified the world because it was too crowded and complex in order to have faster loading and rendering in gazebo
+
+![Map](images/gazebo_map2.png)
+
+-------------------------------------------------------
+
+# SLAM Output
+## This project is all using ready made packages for its functionality such as `gmapping` package
+
+
+Original Map               |  SLAM Map
+:-------------------------:|:-------------------------:
+![Gazebo Map](images/gazebo_map.png)  |  ![SLAM MAp](images/output_map_1.png)
